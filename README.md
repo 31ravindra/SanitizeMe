@@ -1,2 +1,2 @@
-# SanetizeMe
-Sanetize me Android code 
+# SanitizeMe
+Sanitize me Android code 
