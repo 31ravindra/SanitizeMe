@@ -8,7 +8,7 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 
 
-public class SpinnerPlus extends Spinner {
+public class SpinnerPlus extends androidx.appcompat.widget.AppCompatSpinner {
     OnItemSelectedListener listener;
 
     public SpinnerPlus(Context context, AttributeSet attrs) {

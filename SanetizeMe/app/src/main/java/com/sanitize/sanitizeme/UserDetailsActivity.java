@@ -50,6 +50,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     private CheckBox noCB;
     private CheckBox homeCB;
     private  CheckBox showroomCB;
+    private String isMessageIsActive = "True";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +58,10 @@ public class UserDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_details);
         selectedCategories =  (ArrayList<String>)getIntent().getSerializableExtra("selectedCategories");
         showroomDetail =  (List<Details>)getIntent().getSerializableExtra("showroomdetail");
-
         Details showDetail = showroomDetail.get(0);
         showroomAddress = showDetail.getShowroomContact();
         showroomNumber = showDetail.getShowroomAddress();
+
         if(selectedCategories.contains("Two Wheeler") || selectedCategories.contains("Four Wheeler")) {
            isTwoOrFourWheeler = true;
            isTFW = "yes";
@@ -152,17 +153,22 @@ public class UserDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (showroomCB.isChecked()) {
-                    atShowroom = "yes";
-                }else {
-                    atShowroom = "no";
-                }
+                if(!isMessageIsActive.equals("True")) {
+                    showNotAbleToSendMessage();
+                } else {
 
-               if (checkDataEntered() == true) {
-                   UserDetail userDetail = new UserDetail(username.getText().toString(),mobnumber.getText().toString(),email.getText().toString(),address.getText().toString(),isTFW,atShowroom,serviceSelected);
-                   sendNetworkRequest(userDetail);
-                   spinner.setVisibility(View.VISIBLE);
-               }
+                    if (showroomCB.isChecked()) {
+                        atShowroom = "yes";
+                    } else {
+                        atShowroom = "no";
+                    }
+
+                    if (checkDataEntered() == true) {
+                        UserDetail userDetail = new UserDetail(username.getText().toString(), mobnumber.getText().toString(), email.getText().toString(), address.getText().toString(), isTFW, atShowroom, serviceSelected);
+                        sendNetworkRequest(userDetail);
+                        spinner.setVisibility(View.VISIBLE);
+                    }
+                }
 
 
 
@@ -172,8 +178,30 @@ public class UserDetailsActivity extends AppCompatActivity {
             }
         });
 
+        sendMessageOrNotRequest();
+
     }
 
+
+    private void sendMessageOrNotRequest() {
+        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://www.sanitizeme.co.in/api/").addConverterFactory(GsonConverterFactory.create());
+        Retrofit retorfit = builder.build();
+        UserDetialClient client = retorfit.create(UserDetialClient.class);
+        Call<ActivateMessage> call = client.getSendMessageOrNot();
+
+        call.enqueue(new Callback<ActivateMessage>() {
+            @Override
+            public void onResponse(Call<ActivateMessage> call, Response<ActivateMessage> response) {
+
+                isMessageIsActive = response.body().getActivateMessage();
+            }
+
+            @Override
+            public void onFailure(Call<ActivateMessage> call, Throwable t) {
+                isMessageIsActive = "True";
+            }
+        });
+    }
 
     private void sendNetworkRequest(UserDetail userDetail) {
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://www.sanitizeme.co.in/api/api/").addConverterFactory(GsonConverterFactory.create());
@@ -197,6 +225,35 @@ public class UserDetailsActivity extends AppCompatActivity {
                 spinner.setVisibility(View.GONE);
             }
         });
+    }
+
+
+    public void showNotAbleToSendMessage() {
+        AlertDialog alertDialog1 = new AlertDialog.Builder(
+                UserDetailsActivity.this).create();
+
+        // Setting Dialog Title
+        alertDialog1.setTitle("Maintenance in progress!");
+
+        // Setting Dialog Message
+        alertDialog1.setMessage("Service disabled, maintenance in progress");
+
+        // Setting Icon to Dialog
+        // alertDialog1.setIcon(R.drawable.tick);
+
+        // Setting OK Button
+        alertDialog1.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                    }
+                });
+
+
+
+        // Showing Alert Message
+        alertDialog1.show();
     }
 
     public  void showConfirmAlert() {
