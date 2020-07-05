@@ -246,11 +246,10 @@ public class UserDetailsActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-
+                        Intent intent= new Intent(UserDetailsActivity.this,ContactUsActivity.class);
+                        startActivity(intent);
                     }
                 });
-
-
 
         // Showing Alert Message
         alertDialog1.show();

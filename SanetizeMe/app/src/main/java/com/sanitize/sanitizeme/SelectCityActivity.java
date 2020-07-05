@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import java.io.Serializable;
@@ -31,21 +32,21 @@ public class SelectCityActivity extends AppCompatActivity implements AdapterView
     List<Details> showRoomDetails;
     private ProgressBar pBar;
     private  Button nextButton;
-
+    private Spinner spinner;
+    ArrayAdapter<String> dataAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_city);
        // showRoomDetails = new ArrayList<Details>();
-        final SpinnerPlus spinner = (SpinnerPlus) findViewById(R.id.spinner2);
+        spinner = (Spinner) findViewById(R.id.spinner2);
         nextButton=(Button)findViewById(R.id.button);
         nextButton.setEnabled(false);
 
         pBar=(ProgressBar)findViewById(R.id.progressBar);
         pBar.setVisibility(View.GONE);
 
-        // Spinner click listener
-        spinner.setOnItemSelectedListener(this);
+
 
 
         // Spinner Drop down elements
@@ -55,18 +56,19 @@ public class SelectCityActivity extends AppCompatActivity implements AdapterView
         categories.add("Indore");
         categories.add("Bhopal");
         categories.add("Pune");
-        categories.add("Mumbai");
-        categories.add("Delhi");
-        categories.add("Jaipur");
+//        categories.add("Mumbai");
+//        categories.add("Delhi");
+//        categories.add("Jaipur");
 
 
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+        dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-
+        // Spinner click listener
+        spinner.setOnItemSelectedListener(this);
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
 
@@ -83,10 +85,14 @@ public class SelectCityActivity extends AppCompatActivity implements AdapterView
     }
 
 
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // On selecting a spinner item
 
+
+//        if (position == spinner.getSelectedItemPosition())
+//        {
             String item = parent.getItemAtPosition(position).toString();
             if (item != "City Name") {
                 SelectedCity selectedCity = new SelectedCity((item));
@@ -96,10 +102,11 @@ public class SelectCityActivity extends AppCompatActivity implements AdapterView
                 Toast.makeText(SelectCityActivity.this, "Please select city",
                         Toast.LENGTH_SHORT).show();
             }
+            //then at end of statement reset adapter like
 
+           // spinner.setAdapter(dataAdapter);
+      //  }
 
-        // Showing selected spinner item
-       // Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
 
     }
 
@@ -132,6 +139,7 @@ public class SelectCityActivity extends AppCompatActivity implements AdapterView
                 Toast.makeText(SelectCityActivity.this, "Please check internet connection and select city again",
                         Toast.LENGTH_LONG).show();
                 pBar.setVisibility(View.GONE);
+                spinner.setAdapter(dataAdapter);
             }
         });
     }
