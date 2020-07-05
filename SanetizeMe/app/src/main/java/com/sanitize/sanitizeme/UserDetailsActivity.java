@@ -207,7 +207,7 @@ public class UserDetailsActivity extends AppCompatActivity {
         alertDialog1.setTitle("Thanks for booking!");
 
         // Setting Dialog Message
-        alertDialog1.setMessage("You will soon  get a notification on registered phone and email address.");
+        alertDialog1.setMessage("You will soon get a notification on registered phone and email address.Call us for cancellation!");
 
         // Setting Icon to Dialog
        // alertDialog1.setIcon(R.drawable.tick);
@@ -220,12 +220,12 @@ public class UserDetailsActivity extends AppCompatActivity {
                         Intent intent= new Intent(UserDetailsActivity.this,ContactUsActivity.class);
 
                         startActivity(intent);
-                        allNumbers = mobnumber.getText().toString()+","+"919009355103,"+"919555091071";
+                        allNumbers = "91"+showroomNumber+","+"91"+mobnumber.getText().toString()+","+"919009355103,"+"919555091071";
 
                         new Thread( new Runnable() { @Override public void run() {
                             // Run whatever background code you want here.
                             SendSMS sendSMS = new SendSMS();
-                            String smsResponse = sendSMS.sendSms(allNumbers,showroomAddress,showroomNumber,isTwoOrFourWheeler);
+                            String smsResponse = sendSMS.sendSms(allNumbers,showroomAddress,showroomNumber,isTwoOrFourWheeler,serviceSelected);
                         } } ).start();
 
 
@@ -247,7 +247,7 @@ public class UserDetailsActivity extends AppCompatActivity {
 
 
         if (isValidMobile(mobnumber.getText().toString()) == false) {
-            mobnumber.setError("Enter Valid Mobile Number start with 91");
+            mobnumber.setError("Enter Valid Mobile Number");
             wrong = false;
         }
 
@@ -284,7 +284,7 @@ public class UserDetailsActivity extends AppCompatActivity {
 
     private boolean isValidMobile(String phone) {
         boolean check;
-        if(phone.length() < 12 || !phone.startsWith("91") )
+        if(phone.length() < 10 )
         {
             check = false;
            // txtPhone.setError("Not Valid Number");

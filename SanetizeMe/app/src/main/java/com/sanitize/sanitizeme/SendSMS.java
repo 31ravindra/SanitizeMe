@@ -6,18 +6,19 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 public class SendSMS {
 
 
-    public String sendSms(String allnumbers, String showroomAdd, String showroomcontact, boolean isTOF) {
+    public String sendSms(String allnumbers, String showroomAdd, String showroomcontact, boolean isTOF, String categorySelected) {
         try {
             // Construct data
              String SMSMessage;
              if(isTOF) {
-                 SMSMessage = "Dear customer," + '\n' + "Thanks for the booking." + '\n' + "Sanitize Showroom Address - " + showroomAdd + '\n' + "Sanitize Showroom Contact - "+ showroomcontact+'\n' + "We will call you for time slot, Don't Worry!" + '\n' + "Stay Safe!" + '\n' + "feel free to contact us on" + '\n' + "customersupport@sanitizeme.co.in" + '\n' + "9555091071";
+                 SMSMessage = "Dear customer," + '\n' + "Thanks for the booking." + '\n' + "Category Selected -"+categorySelected + '\n'+ "Sanitize Showroom Address - " + showroomAdd + '\n' + "Sanitize Showroom Contact - "+ showroomcontact+'\n' + "We will call you for time slot, Don't Worry!" + '\n' + "Stay Safe!" + '\n' + "feel free to contact us for service and cancellation issue on" + '\n' + "customersupport@sanitizeme.co.in" + '\n' + "9555091071";
              } else {
-                 SMSMessage = "Dear customer," + '\n' + "Thanks for the booking." + '\n'  + "Sanitize Showroom Contact - "+ showroomcontact+'\n' + "We will call you for time slot, Don't Worry!" + '\n' + "Stay Safe!" + '\n' + "feel free to contact us on" + '\n' + "customersupport@sanitizeme.co.in" + '\n' + "9555091071";
+                 SMSMessage = "Dear customer," + '\n' + "Thanks for the booking." + '\n' + "Category Selected -"+categorySelected + '\n' + "Sanitize Showroom Contact - "+ showroomcontact+'\n' + "We will call you for time slot, Don't Worry!" + '\n' + "Stay Safe!" + '\n' + "feel free to contact us for service and cancellation issue on" + '\n' + "customersupport@sanitizeme.co.in" + '\n' + "9555091071";
              }
 
             String apiKey = "apikey=" + "6DoCBMSMl4Q-HNv0ilM3hSMNkgS0FSZGgD9XH80ino";
