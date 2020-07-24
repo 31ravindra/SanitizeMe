@@ -83,34 +83,11 @@ public class UserDetailsActivity extends AppCompatActivity {
         spinner=(ProgressBar)findViewById(R.id.progressBar);
         spinner.setVisibility(View.GONE);
 
-        yesCB = (CheckBox) findViewById(R.id.tfCheckBox);
-        noCB = (CheckBox) findViewById(R.id.nocheckbox);
+
         homeCB = (CheckBox) findViewById(R.id.homecheckBox);
         showroomCB = (CheckBox) findViewById(R.id.showroomcheckBox);
 
-        yesCB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                 if (isChecked) {
-                     if (noCB.isChecked()) {
-                         noCB.setChecked(false);
-                     }
-                 }
-            }
-        }
-        );
 
-        noCB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if (isChecked) {
-                    if (yesCB.isChecked()) {
-                        yesCB.setChecked(false);
-                    }
-                }
-            }
-        }
-        );
 
         homeCB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                              @Override
@@ -159,7 +136,7 @@ public class UserDetailsActivity extends AppCompatActivity {
                     }
 
                     if (checkDataEntered() == true) {
-                        UserDetail userDetail = new UserDetail(username.getText().toString(), mobnumber.getText().toString(), email.getText().toString(), address.getText().toString(), isTFW, atShowroom, serviceSelected);
+                        UserDetail userDetail = new UserDetail(username.getText().toString(), mobnumber.getText().toString(), email.getText().toString(), address.getText().toString(), "yes", atShowroom, serviceSelected);
                         sendNetworkRequest(userDetail);
                         spinner.setVisibility(View.VISIBLE);
                     }
