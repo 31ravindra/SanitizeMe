@@ -1,4 +1,4 @@
-package com.sanitize.sanitizeme;
+package com.sanitizer.sanitizeme;
 
 import java.util.List;
 

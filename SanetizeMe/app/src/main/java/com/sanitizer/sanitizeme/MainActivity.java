@@ -1,4 +1,4 @@
-package com.sanitize.sanitizeme;
+package com.sanitizer.sanitizeme;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        return;
-    }
+//    @Override
+//    public void onBackPressed() {
+//        return;
+//    }
 }

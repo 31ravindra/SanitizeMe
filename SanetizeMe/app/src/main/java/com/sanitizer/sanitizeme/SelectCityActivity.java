@@ -1,19 +1,15 @@
-package com.sanitize.sanitizeme;
+package com.sanitizer.sanitizeme;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import java.io.Serializable;
@@ -56,6 +52,7 @@ public class SelectCityActivity extends AppCompatActivity implements AdapterView
         categories.add("Indore");
         categories.add("Bhopal");
         categories.add("Pune");
+        categories.add("Ujjain");
 //        categories.add("Mumbai");
 //        categories.add("Delhi");
 //        categories.add("Jaipur");

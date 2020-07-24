@@ -1,4 +1,4 @@
-package com.sanitize.sanitizeme;
+package com.sanitizer.sanitizeme;
 
 import androidx.appcompat.app.AppCompatActivity;
 

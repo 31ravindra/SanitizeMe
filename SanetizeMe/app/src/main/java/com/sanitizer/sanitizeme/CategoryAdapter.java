@@ -1,4 +1,4 @@
-package com.sanitize.sanitizeme;
+package com.sanitizer.sanitizeme;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

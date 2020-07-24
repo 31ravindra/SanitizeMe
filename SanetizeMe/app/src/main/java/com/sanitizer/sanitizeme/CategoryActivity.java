@@ -1,4 +1,4 @@
-package com.sanitize.sanitizeme;
+package com.sanitizer.sanitizeme;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,7 +21,7 @@ public class CategoryActivity extends AppCompatActivity implements CategoryAdapt
 
     String[] categoryName = {"Two Wheeler", "Four Wheeler", "House", "Office", "School","Shop", "Garden","Society" };
 
-    int[] categoryImage = {R.drawable.bike, R.drawable.car, R.drawable.home,R.drawable.office, R.drawable.area, R.drawable.shop, R.drawable.garden,R.drawable.society};
+    int[] categoryImage = {R.drawable.bike, R.drawable.car, R.drawable.home,R.drawable.office, R.drawable.school, R.drawable.shops, R.drawable.garden,R.drawable.society};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

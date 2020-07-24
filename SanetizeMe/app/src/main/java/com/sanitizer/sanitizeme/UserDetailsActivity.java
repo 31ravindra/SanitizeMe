@@ -1,13 +1,10 @@
-package com.sanitize.sanitizeme;
-
-import androidx.annotation.RequiresApi;
+package com.sanitizer.sanitizeme;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,13 +13,10 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.RadioButton;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,6 +36,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     String isTFW = "no";
     String atShowroom = "no";
     String serviceSelected = "";
+    String userNumber;
     private ProgressBar spinner;
     String allNumbers;
     String showroomAddress;
@@ -276,12 +271,13 @@ public class UserDetailsActivity extends AppCompatActivity {
                         Intent intent= new Intent(UserDetailsActivity.this,ContactUsActivity.class);
 
                         startActivity(intent);
+                        userNumber = mobnumber.getText().toString();
                         allNumbers = "91"+showroomNumber+","+"91"+mobnumber.getText().toString()+","+"919009355103,"+"919555091071";
 
                         new Thread( new Runnable() { @Override public void run() {
                             // Run whatever background code you want here.
                             SendSMS sendSMS = new SendSMS();
-                            String smsResponse = sendSMS.sendSms(allNumbers,showroomAddress,showroomNumber,isTwoOrFourWheeler,serviceSelected);
+                            String smsResponse = sendSMS.sendSms(allNumbers,showroomAddress,showroomNumber,isTwoOrFourWheeler,serviceSelected,userNumber);
                         } } ).start();
 
 

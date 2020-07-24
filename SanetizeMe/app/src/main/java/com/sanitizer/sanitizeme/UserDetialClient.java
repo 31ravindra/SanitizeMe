@@ -1,4 +1,4 @@
-package com.sanitize.sanitizeme;
+package com.sanitizer.sanitizeme;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
