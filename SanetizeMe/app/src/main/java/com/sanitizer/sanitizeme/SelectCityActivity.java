@@ -15,13 +15,14 @@ import android.widget.Toast;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
+import okhttp3.OkHttpClient;
 
 public class SelectCityActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
 
@@ -110,8 +111,16 @@ public class SelectCityActivity extends AppCompatActivity implements AdapterView
 
 
     private void sendNetworkRequest(SelectedCity selectedCity) {
+        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .build();
+
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://www.sanitizeme.co.in/api/").addConverterFactory(GsonConverterFactory.create());
+        builder.client(okHttpClient);
         Retrofit retorfit = builder.build();
+
         UserDetialClient client = retorfit.create(UserDetialClient.class);
         Call<ShowRoomDetail> call = client.selectCity(selectedCity);
 

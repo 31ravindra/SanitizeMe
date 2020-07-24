@@ -115,7 +115,8 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine"
+        android:maxLines="3"
         android:text=""
         app:layout_constraintStart_toEndOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/emailtext" />
