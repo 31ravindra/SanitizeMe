@@ -138,9 +138,7 @@ public void codeAfterCityRequest(List<String> cities) {
                     cities = response.body().getCityNames();
                     cities.add(0, "City Name");
                     codeAfterCityRequest(cities);
-                    // Toast.makeText(SelectCityActivity.this, "Success",
-                    //  Toast.LENGTH_LONG).show();
-                    nextButton.setEnabled(true);
+
                     cityBar.setVisibility(View.GONE);
                 } else {
                     Toast.makeText(SelectCityActivity.this, "No city",

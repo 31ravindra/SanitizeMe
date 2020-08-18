@@ -8,7 +8,7 @@ import android.os.Handler;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private final int SPLASH_TIME_OUT = 1500;
+    private final int SPLASH_TIME_OUT = 1700;
 
 
     @Override
