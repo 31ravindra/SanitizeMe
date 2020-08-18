@@ -16,4 +16,7 @@ public interface UserDetialClient {
     @GET("ActivateMessageService")
     Call<ActivateMessage> getSendMessageOrNot();
 
+    @GET("CityNames")
+    Call<CityListModel> getAllCities();
+
 }

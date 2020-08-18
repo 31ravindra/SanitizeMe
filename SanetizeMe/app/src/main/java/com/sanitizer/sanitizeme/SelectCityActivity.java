@@ -27,7 +27,10 @@ import okhttp3.OkHttpClient;
 public class SelectCityActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
 
     List<Details> showRoomDetails;
+    List<String> cities;
+
     private ProgressBar pBar;
+    private ProgressBar cityBar;
     private  Button nextButton;
     private Spinner spinner;
     ArrayAdapter<String> dataAdapter;
@@ -43,46 +46,52 @@ public class SelectCityActivity extends AppCompatActivity implements AdapterView
         pBar=(ProgressBar)findViewById(R.id.progressBar);
         pBar.setVisibility(View.GONE);
 
+        cityBar = (ProgressBar)findViewById(R.id.cityprogressBar);
 
+
+        getAllCitiesRequest();
 
 
         // Spinner Drop down elements
-        List<String> categories = new ArrayList<String>();
-        categories.add("City Name");
-        categories.add("Khargone");
-        categories.add("Indore");
-        categories.add("Bhopal");
-        categories.add("Pune");
-        categories.add("Ujjain");
+//        List<String> categories = new ArrayList<String>();
+//        categories.add("City Name");
+//        categories.add("Khargone");
+//        categories.add("Indore");
+//        categories.add("Bhopal");
+//        categories.add("Pune");
+//        categories.add("Ujjain");
 //        categories.add("Mumbai");
 //        categories.add("Delhi");
 //        categories.add("Jaipur");
 
 
-        // Creating adapter for spinner
-        dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
 
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // Spinner click listener
-        spinner.setOnItemSelectedListener(this);
-        // attaching data adapter to spinner
-        spinner.setAdapter(dataAdapter);
-
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(SelectCityActivity.this,CategoryActivity.class);
-                intent.putExtra("data",String.valueOf(spinner.getSelectedItem()));
-                intent.putExtra("showroomdetail", (Serializable)showRoomDetails);
-
-                startActivity(intent);
-            }
-        });
     }
 
 
+public void codeAfterCityRequest(List<String> cities) {
+    // Creating adapter for spinner
+    dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cities);
+
+    // Drop down layout style - list view with radio button
+    dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+    // Spinner click listener
+    spinner.setOnItemSelectedListener(this);
+    // attaching data adapter to spinner
+    spinner.setAdapter(dataAdapter);
+
+    nextButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent= new Intent(SelectCityActivity.this,CategoryActivity.class);
+            intent.putExtra("data",String.valueOf(spinner.getSelectedItem()));
+            intent.putExtra("showroomdetail", (Serializable)showRoomDetails);
+
+            startActivity(intent);
+        }
+    });
+}
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -108,6 +117,47 @@ public class SelectCityActivity extends AppCompatActivity implements AdapterView
 
     }
 
+    private void getAllCitiesRequest() {
+        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .build();
+
+        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://www.sanitizeme.co.in/api/").addConverterFactory(GsonConverterFactory.create());
+        builder.client(okHttpClient);
+        Retrofit retorfit = builder.build();
+
+        UserDetialClient client = retorfit.create(UserDetialClient.class);
+        Call<CityListModel> call = client.getAllCities();
+
+        call.enqueue(new Callback<CityListModel>() {
+            @Override
+            public void onResponse(Call<CityListModel> call, Response<CityListModel> response) {
+                if(response.body() != null) {
+                    cities = response.body().getCityNames();
+                    cities.add(0, "City Name");
+                    codeAfterCityRequest(cities);
+                    // Toast.makeText(SelectCityActivity.this, "Success",
+                    //  Toast.LENGTH_LONG).show();
+                    nextButton.setEnabled(true);
+                    cityBar.setVisibility(View.GONE);
+                } else {
+                    Toast.makeText(SelectCityActivity.this, "No city",
+                            Toast.LENGTH_LONG).show();
+                    cityBar.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CityListModel> call, Throwable t) {
+                Toast.makeText(SelectCityActivity.this, "Please check internet connection",
+                        Toast.LENGTH_LONG).show();
+                pBar.setVisibility(View.GONE);
+               // spinner.setAdapter(dataAdapter);
+            }
+        });
+    }
 
 
     private void sendNetworkRequest(SelectedCity selectedCity) {
