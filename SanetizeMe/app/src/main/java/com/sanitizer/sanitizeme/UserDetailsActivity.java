@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     private CheckBox noCB;
     private CheckBox homeCB;
     private  CheckBox showroomCB;
+    private TextView sanitizeText;
     private String isMessageIsActive = "True";
 
     @Override
@@ -58,12 +60,23 @@ public class UserDetailsActivity extends AppCompatActivity {
         showroomAddress = showDetail.getShowroomContact();
         showroomNumber = showDetail.getShowroomAddress();
 
+        homeCB = (CheckBox) findViewById(R.id.homecheckBox);
+        showroomCB = (CheckBox) findViewById(R.id.showroomcheckBox);
+        sanitizeText = (TextView)findViewById(R.id.textlabel);
+
+
         if(selectedCategories.contains("Two Wheeler") || selectedCategories.contains("Four Wheeler")) {
            isTwoOrFourWheeler = true;
            isTFW = "yes";
+           homeCB.setVisibility(View.VISIBLE);
+           showroomCB.setVisibility(View.VISIBLE);
+           sanitizeText.setVisibility(View.VISIBLE);
        } else {
            isTwoOrFourWheeler = false;
            isTFW = "no";
+            homeCB.setVisibility(View.INVISIBLE);
+            showroomCB.setVisibility(View.INVISIBLE);
+            sanitizeText.setVisibility(View.INVISIBLE);
        }
 
         serviceSelected = selectedCategories.toString();
@@ -85,8 +98,8 @@ public class UserDetailsActivity extends AppCompatActivity {
         spinner.setVisibility(View.GONE);
 
 
-        homeCB = (CheckBox) findViewById(R.id.homecheckBox);
-        showroomCB = (CheckBox) findViewById(R.id.showroomcheckBox);
+
+
 
 
 
@@ -296,10 +309,12 @@ public class UserDetailsActivity extends AppCompatActivity {
 //            wrong = false;
 //        }
 
-//        if (isValidMail(email.getText().toString()) == false) {
-//            email.setError("Enter valid email address");
-//            wrong = false;
-//        }
+        if(!isEmpty(email)) {
+            if (isValidMail(email.getText().toString().trim()) == false) {
+                email.setError("Enter valid email address");
+                wrong = false;
+            }
+        }
         return  wrong;
     }
     boolean isEmpty(EditText text) {
@@ -307,24 +322,17 @@ public class UserDetailsActivity extends AppCompatActivity {
         return TextUtils.isEmpty(str);
     }
 
-//    private boolean isValidMail(String email) {
-//        return Pattern.compile("^(\"(91)?[7-9][0-9]{12}\")$").matcher(email).matches();
-//    }
+    private boolean isValidMail(String email){
+
+        return Pattern.compile("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
+                + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
+    }
 
 
-//    private boolean isValidMobile(String phone) {
-//        boolean check;
-//        if(phone.length() < 10 )
-//        {
-//            check = false;
-//           // txtPhone.setError("Not Valid Number");
-//        }
-//        else
-//        {
-//            check = true;
-//        }
-//        return check;
-//    }
 
     private boolean isValidMobile(String phone) {
         if(!Pattern.matches("[a-zA-Z]+", phone)) {
