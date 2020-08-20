@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -311,17 +312,24 @@ public class UserDetailsActivity extends AppCompatActivity {
 //    }
 
 
+//    private boolean isValidMobile(String phone) {
+//        boolean check;
+//        if(phone.length() < 10 )
+//        {
+//            check = false;
+//           // txtPhone.setError("Not Valid Number");
+//        }
+//        else
+//        {
+//            check = true;
+//        }
+//        return check;
+//    }
+
     private boolean isValidMobile(String phone) {
-        boolean check;
-        if(phone.length() < 10 )
-        {
-            check = false;
-           // txtPhone.setError("Not Valid Number");
+        if(!Pattern.matches("[a-zA-Z]+", phone)) {
+            return phone.length() == 10;
         }
-        else
-        {
-            check = true;
-        }
-        return check;
+        return false;
     }
 }
