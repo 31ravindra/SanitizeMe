@@ -30,7 +30,7 @@
         android:layout_marginBottom="80dp"
         android:background="#FAFAFA"
         android:numColumns="2"
-        android:scrollbarFadeDuration="0"
+        android:fadeScrollbars="false"
         android:scrollbarThumbVertical="@drawable/scrollbar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

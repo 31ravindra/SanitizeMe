@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,6 +55,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_details);
+
         selectedCategories =  (ArrayList<String>)getIntent().getSerializableExtra("selectedCategories");
         showroomDetail =  (List<Details>)getIntent().getSerializableExtra("showroomdetail");
         Details showDetail = showroomDetail.get(0);
@@ -63,6 +65,7 @@ public class UserDetailsActivity extends AppCompatActivity {
         homeCB = (CheckBox) findViewById(R.id.homecheckBox);
         showroomCB = (CheckBox) findViewById(R.id.showroomcheckBox);
         sanitizeText = (TextView)findViewById(R.id.textlabel);
+
 
 
         if(selectedCategories.contains("Two Wheeler") || selectedCategories.contains("Four Wheeler")) {
