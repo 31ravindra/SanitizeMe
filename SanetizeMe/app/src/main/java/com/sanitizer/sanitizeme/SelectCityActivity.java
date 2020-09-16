@@ -124,7 +124,7 @@ public void codeAfterCityRequest(List<String> cities) {
                 .writeTimeout(60, TimeUnit.SECONDS)
                 .build();
 
-        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://www.sanitizeme.co.in/api/").addConverterFactory(GsonConverterFactory.create());
+        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://ec2-3-6-17-6.ap-south-1.compute.amazonaws.com/api/").addConverterFactory(GsonConverterFactory.create());
         builder.client(okHttpClient);
         Retrofit retorfit = builder.build();
 
@@ -165,7 +165,7 @@ public void codeAfterCityRequest(List<String> cities) {
                 .writeTimeout(60, TimeUnit.SECONDS)
                 .build();
 
-        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://www.sanitizeme.co.in/api/").addConverterFactory(GsonConverterFactory.create());
+        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://ec2-3-6-17-6.ap-south-1.compute.amazonaws.com/api/").addConverterFactory(GsonConverterFactory.create());
         builder.client(okHttpClient);
         Retrofit retorfit = builder.build();
 

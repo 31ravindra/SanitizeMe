@@ -173,7 +173,7 @@ public class UserDetailsActivity extends AppCompatActivity {
 
 
     private void sendMessageOrNotRequest() {
-        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://www.sanitizeme.co.in/api/").addConverterFactory(GsonConverterFactory.create());
+        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://ec2-3-6-17-6.ap-south-1.compute.amazonaws.com.in/api/").addConverterFactory(GsonConverterFactory.create());
         Retrofit retorfit = builder.build();
         UserDetialClient client = retorfit.create(UserDetialClient.class);
         Call<ActivateMessage> call = client.getSendMessageOrNot();
@@ -193,7 +193,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     }
 
     private void sendNetworkRequest(UserDetail userDetail) {
-        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://www.sanitizeme.co.in/api/api/").addConverterFactory(GsonConverterFactory.create());
+        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://ec2-3-6-17-6.ap-south-1.compute.amazonaws.com/api/api/").addConverterFactory(GsonConverterFactory.create());
         Retrofit retorfit = builder.build();
         UserDetialClient client = retorfit.create(UserDetialClient.class);
         Call<String> call = client.Book(userDetail);
