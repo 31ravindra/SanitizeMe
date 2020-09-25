@@ -106,6 +106,7 @@ public void codeAfterCityRequest(List<String> cities) {
                 sendNetworkRequest(selectedCity);
                 pBar.setVisibility(View.VISIBLE);
             } else {
+                nextButton.setEnabled(false);
                 Toast.makeText(SelectCityActivity.this, "Please select city",
                         Toast.LENGTH_SHORT).show();
             }

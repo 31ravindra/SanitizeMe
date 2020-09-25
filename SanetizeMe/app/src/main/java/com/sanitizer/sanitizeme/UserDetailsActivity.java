@@ -173,7 +173,7 @@ public class UserDetailsActivity extends AppCompatActivity {
 
 
     private void sendMessageOrNotRequest() {
-        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://ec2-3-6-17-6.ap-south-1.compute.amazonaws.com.in/api/").addConverterFactory(GsonConverterFactory.create());
+        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("http://ec2-3-6-17-6.ap-south-1.compute.amazonaws.com/api/").addConverterFactory(GsonConverterFactory.create());
         Retrofit retorfit = builder.build();
         UserDetialClient client = retorfit.create(UserDetialClient.class);
         Call<ActivateMessage> call = client.getSendMessageOrNot();
@@ -182,6 +182,7 @@ public class UserDetailsActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ActivateMessage> call, Response<ActivateMessage> response) {
 
+                assert response.body() != null;
                 isMessageIsActive = response.body().getActivateMessage();
             }
 
