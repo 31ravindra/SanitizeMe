@@ -32,15 +32,15 @@ public class ContactUsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
 
-        Button homeButton = (Button) findViewById(R.id.homebutton);
-
-        homeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(ContactUsActivity.this,MainActivity.class);
-                startActivity(intent);
-            }
-        });
+//        Button homeButton = (Button) findViewById(R.id.homebutton);
+//
+//        homeButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent= new Intent(ContactUsActivity.this,MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
