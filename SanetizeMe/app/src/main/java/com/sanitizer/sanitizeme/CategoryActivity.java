@@ -24,9 +24,9 @@ public class CategoryActivity extends AppCompatActivity implements CategoryAdapt
     List<Details>showRoomDetails;
     Button continueButton;
 
-    String[] categoryName = {"Two Wheeler", "Four Wheeler", "House", "Office", "School","Shop", "Garden","Society" };
+    String[] categoryName = {"Two Wheeler", "Four Wheeler", "House", "Office", "Gym","Shop", "Restaurants","Society" };
 
-    int[] categoryImage = {R.drawable.bike, R.drawable.car, R.drawable.home,R.drawable.office, R.drawable.school, R.drawable.shops, R.drawable.garden,R.drawable.society};
+    int[] categoryImage = {R.drawable.bike, R.drawable.car, R.drawable.home,R.drawable.office, R.drawable.gym, R.drawable.shops, R.drawable.restaurant,R.drawable.society};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
