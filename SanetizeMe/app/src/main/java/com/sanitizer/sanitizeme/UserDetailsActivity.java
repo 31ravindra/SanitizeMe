@@ -162,18 +162,8 @@ public class UserDetailsActivity extends AppCompatActivity {
                 if(!isMessageIsActive.equals("True")) {
                     showNotAbleToSendMessage();
                 } else {
+                    showExtraConfirmAlert();
 
-                    if (showroomCB.isChecked()) {
-                        atShowroom = "yes";
-                    } else {
-                        atShowroom = "no";
-                    }
-
-                    if (checkDataEntered() == true) {
-                        UserDetail userDetail = new UserDetail(username.getText().toString(), mobnumber.getText().toString(), email.getText().toString(), address.getText().toString(), "yes", atShowroom, serviceSelected);
-                        sendNetworkRequest(userDetail);
-                        spinner.setVisibility(View.VISIBLE);
-                    }
                 }
 
 
@@ -300,6 +290,44 @@ public class UserDetailsActivity extends AppCompatActivity {
         alertDialog1.show();
     }
 
+    public void showExtraConfirmAlert(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Please Confirm");
+        builder.setMessage("Do you want to book the service?");
+
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                // Do nothing but close the dialog
+
+                if (showroomCB.isChecked()) {
+                    atShowroom = "yes";
+                } else {
+                    atShowroom = "no";
+                }
+
+                if (checkDataEntered() == true) {
+                    UserDetail userDetail = new UserDetail(username.getText().toString(), mobnumber.getText().toString(), email.getText().toString(), address.getText().toString(), "yes", atShowroom, serviceSelected);
+                    sendNetworkRequest(userDetail);
+                    spinner.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                // Do nothing
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
     public  void showConfirmAlert() {
         AlertDialog alertDialog1 = new AlertDialog.Builder(
                 UserDetailsActivity.this).create();

@@ -17,7 +17,7 @@ public class SendSMS {
                  SMSMessage = "Dear customer("+userNumber+")," + '\n' + "Thanks for the booking." + '\n' + "Category Selected -"+categorySelected + '\n' + "Sanitize Showroom Contact - "+ showroomcontact+'\n' + "We will call you for time slot, Don't Worry!" + '\n' + "Stay Safe!" + '\n' + "feel free to contact us for service and cancellation issue on" + '\n' + "customersupport@sanitizeme.co.in" + '\n' + "9555091071";
              }
 
-            String apiKey = "apikey=" + " BKniB2oGHHU-HYhhYC7QRkBvmJy2XrlVuHbLSRx2x6";
+            String apiKey = "apikey=" + " 6DoCBMSMl4Q-HNv0ilM3hSMNkgS0FSZGgD9XH80ino";
             String message = "&message=" + SMSMessage;
             String sender = "&sender=" + "TXTLCL";
             String numbers = "&numbers=" + allnumbers;
